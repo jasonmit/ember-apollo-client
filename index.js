@@ -17,7 +17,7 @@ module.exports = {
 
   included() {
     this._super.included.apply(this, arguments);
-    
+
     const host = this._findHost();
     this.addonConfig = host.options.apollo || {};
 
@@ -28,6 +28,7 @@ module.exports = {
   treeForVendor() {
     const WebpackDependencyPlugin = require('./lib/webpack-dependency-plugin');
     const {
+      paths: userPaths = [],
       include: userPackages = [],
       exclude: excludedPackages = [],
     } = this.addonConfig;
@@ -39,6 +40,7 @@ module.exports = {
     return new WebpackDependencyPlugin({
       outputName: 'apollo-client',
       expose: [...includedPackages, ...userPackages],
+      paths: userPaths,
     });
   },
 
