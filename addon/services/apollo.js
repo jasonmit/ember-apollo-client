@@ -43,7 +43,7 @@ function newDataFunc(observable, resultKey, resolve, mergedProps = {}) {
       return resolve(obj);
     }
 
-    run(() => {
+    run.join(null, () => {
       isArray(obj)
         ? obj.setObjects(dataToSend)
         : setProperties(obj, dataToSend);
